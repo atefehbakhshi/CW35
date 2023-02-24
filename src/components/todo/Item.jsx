@@ -1,14 +1,28 @@
 import { Icon } from "@iconify/react";
 import React from "react";
 
-const Item = () => {
+const Item = ({ todo }) => {
+  let bgColor = "red";
+
+  if (todo.status === "doing") {
+    bgColor = "orange";
+  }
+  if (todo.status === "done") {
+    bgColor = "green";
+  }
+
   return (
     <div className="flex flex-col gap-3 p-3">
       <div className="flex justify-between items-center p-2 bg-slate-300 rounded">
-        <p> Task: test to do</p>
+        <p> Task: {todo.title}</p>
         <p>
           Status:
-          <span className="bg-red-500 text-white rounded p-1">done</span>
+          <span
+            className=" text-white rounded p-1"
+            style={{ backgroundColor: bgColor }}
+          >
+            {todo.status}
+          </span>
         </p>
         <div className="flex gap-3">
           <Icon
