@@ -11,30 +11,6 @@
       "title": "class",
       "status": "doing",
       "description": "nothing"
-    },
-    {
-      "id": 3,
-      "title": "class",
-      "status": "done",
-      "description": "nothing"
-    },
-    {
-      "title": "new",
-      "status": "todo",
-      "description": "desc",
-      "id": 4
-    },
-    {
-      "title": "task2",
-      "status": "done",
-      "description": "nothing",
-      "id": 5
-    },
-    {
-      "title": "task3",
-      "status": "doing",
-      "description": "something",
-      "id": 6
     }
   ]
 }

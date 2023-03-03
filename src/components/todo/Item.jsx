@@ -1,7 +1,11 @@
 import { Icon } from "@iconify/react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { showModal } from "../../store/slices/todo-slice";
 
 const Item = ({ todo }) => {
+  const dispatch = useDispatch();
+
   let bgColor = "red";
 
   if (todo.status === "doing") {
@@ -25,12 +29,14 @@ const Item = ({ todo }) => {
           </span>
         </p>
         <div className="flex gap-3">
-          <Icon
-            icon="carbon:trash-can"
-            color="white"
-            width="24"
-            className="bg-red-500 text-center rounded p-1"
-          />
+          <button onClick={() => dispatch(showModal(todo.id))}>
+            <Icon
+              icon="carbon:trash-can"
+              color="white"
+              width="24"
+              className="bg-red-500 text-center rounded p-1"
+            />
+          </button>
           <Icon
             icon="material-symbols:edit"
             color="white"
