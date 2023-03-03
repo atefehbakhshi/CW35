@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { showModal } from "../../store/slices/todo-slice";
 
 const Item = ({ todo }) => {
@@ -37,12 +38,14 @@ const Item = ({ todo }) => {
               className="bg-red-500 text-center rounded p-1"
             />
           </button>
-          <Icon
-            icon="material-symbols:edit"
-            color="white"
-            width="24"
-            className="bg-blue-500 text-center rounded p-1"
-          />
+          <Link to={`edit/${todo.id}`}>
+            <Icon
+              icon="material-symbols:edit"
+              color="white"
+              width="24"
+              className="bg-blue-500 text-center rounded p-1"
+            />
+          </Link>
         </div>
       </div>
     </div>

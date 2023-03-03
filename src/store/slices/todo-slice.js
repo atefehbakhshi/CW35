@@ -1,19 +1,31 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchTodoService } from "../../api/services/get";
+import { fetchEachTodoService, fetchTodoService } from "../../api/services/get";
 import { sendTodoSrvice } from "../../api/services/post";
 import { deleteTodoSrvice } from "../../api/services/delete";
+import { editTodoSrvice } from "../../api/services/put";
 
 const initialState = {
   todoList: [],
+  editedTodo: {},
   status: "idle",
   showModal: false,
   selectedTodoId: 0,
 };
 
+// all todos
 export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   const res = await fetchTodoService();
   return res.data;
 });
+
+// single todos
+export const fetchEachTodos = createAsyncThunk(
+  "todos/fetchEachTodos",
+  async (id) => {
+    const res = await fetchEachTodoService(id);
+    return res.data;
+  }
+);
 
 export const sendTodo = createAsyncThunk("todos/sendTodo", async (data) => {
   const res = await sendTodoSrvice(data);
@@ -22,6 +34,11 @@ export const sendTodo = createAsyncThunk("todos/sendTodo", async (data) => {
 export const deleteTodo = createAsyncThunk("todos/deleteTodo", async (id) => {
   const res = await deleteTodoSrvice(id);
   return id;
+});
+
+export const editTodo = createAsyncThunk("todos/editTodo", async (data) => {
+  const { id } = data;
+  const res = await editTodoSrvice(id, data);
 });
 
 const todoSlice = createSlice({
@@ -46,6 +63,9 @@ const todoSlice = createSlice({
     [fetchTodos.fulfilled]: (state, action) => {
       state.todoList = action.payload;
       state.status = "success";
+    },
+    [fetchEachTodos.fulfilled]: (state, action) => {
+      state.editedTodo = action.payload;
     },
     [deleteTodo.fulfilled]: (state, action) => {
       let filteredList = state.todoList;
